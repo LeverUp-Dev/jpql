@@ -23,10 +23,11 @@ public class JPQLMain {
             member.setAge(10);
             em.persist(member);
 
-            TypedQuery<Member> query = em.createQuery("select m from Member m", Member.class);
-
-            Member singleResult = query.getSingleResult();
-            System.out.println("result = " + singleResult);
+            Member result =
+                    em.createQuery("select m from Member m where m.username = :username", Member.class)
+                    .setParameter("username", "member1")
+                    .getSingleResult();
+            System.out.println("singleResult = " + singleResult.getUsername());
 
             tx.commit();
         } catch (Exception e) {
