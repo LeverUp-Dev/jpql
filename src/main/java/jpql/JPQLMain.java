@@ -24,11 +24,9 @@ public class JPQLMain {
             em.persist(member);
 
             TypedQuery<Member> query = em.createQuery("select m from Member m", Member.class);
-            List<Member> resultList = query.getResultList();
 
-            for (Member member1 : resultList) {
-                System.out.println("member1 = " + member1);
-            }
+            Member singleResult = query.getSingleResult();
+            System.out.println("result = " + singleResult);
 
             tx.commit();
         } catch (Exception e) {
