@@ -26,8 +26,12 @@ public class JPQLMain {
             em.flush();
             em.clear();
 
-            em.createQuery("select distinct m.username, m.age from Member m")
+            List<Object[]> resultList = em.createQuery("select distinct m.username, m.age from Member m")
                     .getResultList();
+
+            Object[] result = resultList.get(0);
+            System.out.println("username = " + result[0]);
+            System.out.println("age = " + result[1]);
 
             tx.commit();
         } catch (Exception e) {
