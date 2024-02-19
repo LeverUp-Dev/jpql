@@ -26,7 +26,7 @@ public class JPQLMain {
             em.flush();
             em.clear();
 
-            List<Team> result = em.createQuery("select m.team from Member m join m.team t", Team.class)
+            em.createQuery("select o.address from Order o", Address.class)
                     .getResultList();
 
             tx.commit();
