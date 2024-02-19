@@ -25,7 +25,7 @@ public class JPQLMain {
             em.persist(team);
 
             Member member = new Member();
-            member.setUsername("member");
+            member.setUsername("teamA");
             member.setAge(20);
 
             member.setTeam(team);
@@ -35,7 +35,7 @@ public class JPQLMain {
             em.flush();
             em.clear();
 
-            String query = "select m from Member m left join m.team t on t.name = 'teamA'";
+            String query = "select m from Member m left join Team t on m.username = t.name";
             List<Member> result = em.createQuery(query, Member.class)
                     .getResultList();
 
