@@ -26,11 +26,8 @@ public class JPQLMain {
             em.flush();
             em.clear();
 
-            List<Member> result = em.createQuery("select m from Member m", Member.class)
+            List<Team> result = em.createQuery("select m.team from Member m join m.team t", Team.class)
                     .getResultList();
-
-            Member findFirstMember = result.get(0);
-            findFirstMember.setAge(20);
 
             tx.commit();
         } catch (Exception e) {
