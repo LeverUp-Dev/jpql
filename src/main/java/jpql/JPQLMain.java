@@ -26,12 +26,13 @@ public class JPQLMain {
             em.flush();
             em.clear();
 
-            List<Object[]> resultList = em.createQuery("select distinct m.username, m.age from Member m")
+            List<MemberDTO> resultList =
+                    em.createQuery("select new jpql.MemberDTO(m.username, m.age from Member m)", MemberDTO.class)
                     .getResultList();
 
-            Object[] result = resultList.get(0);
-            System.out.println("username = " + result[0]);
-            System.out.println("age = " + result[1]);
+            MemberDTO memberDTO = resultList.get(0);
+            System.out.println("memberDTO = " + memberDTO.getUsername());
+            System.out.println("memberDTO = " + memberDTO.getAge());
 
             tx.commit();
         } catch (Exception e) {
